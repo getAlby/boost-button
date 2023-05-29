@@ -1,0 +1,47 @@
+{
+  "name": "boost-button",
+  "version": "1.0.0",
+  "description": "Inject boost button to zap via lightning",
+  "main": "dist/index.jsx",
+  "source": "src/index.tsx",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "yarn run clean",
+    "prepack": "yarn run build",
+    "clean": "rm -rf dist",
+    "build": "microbundle",
+    "dev": "microbundle watch"
+  },
+  "exports": {
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.modern.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/getAlby/boost-button.git"
+  },
+  "keywords": [
+    "boost",
+    "lightning"
+  ],
+  "author": "Alby Contributors",
+  "license": "MIT",
+  "funding": {
+    "type": "lightning",
+    "url": "lightning:hello@getalby.com"
+  },
+  "bugs": {
+    "url": "https://github.com/getAlby/boost-button/issues"
+  },
+  "homepage": "https://github.com/getAlby/boost-button#readme",
+  "dependencies": {
+    "@webbtc/webln-types": "^1.0.10",
+    "alby-tools": "^2.3.0",
+    "microbundle": "^0.15.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
