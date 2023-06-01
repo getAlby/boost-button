@@ -50,27 +50,10 @@ injectBoostButton(lnurl);
 
 ```
 
-And Boost Button component would be injected like this:
+And you should see the Boost Button widget on the bottom right of your app:
 
 <img src="docs/injected.png">
 
-### In the CLI
-Install the package by running
-```bash
-npm install -g npm-fund-ln
-```
-and run it with
-```bash
-npm fund-ln
-```
+## Thanks
 
-## 🛠 Development
-
-```
-yarn install
-yarn run build
-```
-
-
-### Thanks
 @bigyanpoudel for https://github.com/bigyanpoudel/react-vite-library
