@@ -1,6 +1,6 @@
 {
   "name": "boost-button",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Inject boost button to zap via lightning",
   "type": "module",
   "scripts": {
