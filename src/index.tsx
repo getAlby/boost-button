@@ -1,9 +1,9 @@
 import React from 'react';
 import { createRoot } from "react-dom/client";
 
-import BoostButton from "./button";
+import { BoostButton } from "./button";
 
-function injectBoostButton(lnurl) {
+export function injectBoostButton(lnurl: string) {
   if (document.querySelector("body #alby-shadow")) {
     return;
   }
@@ -13,6 +13,10 @@ function injectBoostButton(lnurl) {
 
   shadowWrapper.id = "alby-shadow";
   app.id = "alby-root";
+  app.style.position = "fixed";
+  app.style.zIndex = "1000000000";
+  app.style.bottom = "20px";
+  app.style.right = "20px";
 
   if (body && !window.frameElement) {
     body.prepend(shadowWrapper);
@@ -25,4 +29,4 @@ function injectBoostButton(lnurl) {
   root.render(<BoostButton lnurl={lnurl} />);
 }
 
-export default injectBoostButton;
+export { BoostButton };
