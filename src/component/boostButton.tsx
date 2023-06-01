@@ -2,10 +2,15 @@ import { LightningAddress } from "alby-tools";
 import React, { useState } from "react";
 import { WebLNProvider } from '@webbtc/webln-types';
 
-export function BoostButton({ lnurl, expanded = false }: {
+export type BoostButtonProps = {
   lnurl: string;
   expanded?: boolean;
-}) {
+}
+
+export const BoostButton: React.FC<BoostButtonProps> = ({
+  lnurl,
+  expanded = false
+}) => {
   const [webLNDisabled, setWebLNDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -13,8 +18,8 @@ export function BoostButton({ lnurl, expanded = false }: {
   const [sent, setSent] = useState(false);
 
   const [hold, setHold] = useState(false);
-  const [timer, setTimer] = useState();
-  const [holdTimer, setHoldTimer] = useState();
+  const [timer, setTimer] = useState<number>();
+  const [holdTimer, setHoldTimer] = useState<number>();
 
   const [expand, setExpand] = useState(expanded);
   const [satsClicked, setSatsClicked] = useState(0);
@@ -30,20 +35,22 @@ export function BoostButton({ lnurl, expanded = false }: {
       const result = await webln.lnurl(lnurl);
       if (result) {
         console.log(result);
-        setSats("dunno how many");
+        // Don't know how many sats are sent
         setSent(true);
       }
     } catch (e) {
-      if (e.message !== "Prompt was closed" && e.message !== "User rejected")
-        setWebLNDisabled(true);
-        console.error(e.message);
+      if (e instanceof Error) {
+        if (e.message !== "Prompt was closed" && e.message !== "User rejected")
+          setWebLNDisabled(true);
+          console.error(e.message);
+      }
     } finally {
       setLoading(false);
       setHold(false);
     }
   };
 
-  const generateInvoice = async (satsClicked) => {
+  const generateInvoice = async (satsClicked: number) => {
     setLoading(true);
     if (!satsClicked) return;
     const ln = new LightningAddress(lnurl);
@@ -64,10 +71,12 @@ export function BoostButton({ lnurl, expanded = false }: {
         setSent(true);
       }
     } catch (e) {
+      if (e instanceof Error) {
       setSatsClicked(0);
+      console.error(e.message);
       if (e.message !== "Prompt was closed" && e.message !== "User rejected")
         setWebLNDisabled(true);
-      console.error(e.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -87,7 +96,7 @@ export function BoostButton({ lnurl, expanded = false }: {
         if (timer) clearTimeout(timer);
         if (holdTimer) clearTimeout(holdTimer);
         setTimer(
-          setTimeout(() => {
+          window.setTimeout(() => {
             generateInvoice(satsClicked + 1000);
           }, 1000)
         );
@@ -96,7 +105,7 @@ export function BoostButton({ lnurl, expanded = false }: {
       onMouseDown={() => {
         if (loading || webLNDisabled || sent || hold || loading) return;
         setHoldTimer(
-          setTimeout(() => {
+          window.setTimeout(() => {
             setHold(true);
             setSatsClicked(0);
             sendSatsToLnurl();

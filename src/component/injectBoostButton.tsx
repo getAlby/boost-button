@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 import { createRoot } from "react-dom/client";
 
-import { BoostButton } from "./button";
+import { BoostButton } from "./boostButton";
 
-export function injectBoostButton(lnurl: string) {
+export const injectBoostButton = (lnurl: string) => {
   if (document.querySelector("body #alby-shadow")) {
     return;
   }
@@ -28,5 +28,3 @@ export function injectBoostButton(lnurl: string) {
 
   root.render(<BoostButton lnurl={lnurl} />);
 }
-
-export { BoostButton };
