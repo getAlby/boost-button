@@ -9,7 +9,7 @@ React component that allows you to integrate a boost button into your web applic
 ## 🚀 Quick Start
 
 ```
-npm install npm-fund-ln
+npm install boost-button
 ```
 
 ## 🤙 Usage
