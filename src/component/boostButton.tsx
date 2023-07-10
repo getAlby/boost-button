@@ -86,11 +86,12 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
 
   return (
     <button
+      id="alby-boost-button"
       className={`${
         !webLNDisabled && !satsClicked && !sent
-          ? "ripple-shadow"
-          : "normal-shadow"
-      } ${!webLNDisabled ? "boost" : "disabled-boost"}`}
+          ? "alby-ripple-shadow"
+          : "alby-normal-shadow"
+      } ${!webLNDisabled ? "alby-boost" : "alby-disabled-boost"}`}
       onClick={() => {
         if (loading || webLNDisabled || sent || hold) return;
         if (timer) clearTimeout(timer);
@@ -118,7 +119,7 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
     >
       <style>
         {`
-        button {
+        #alby-boost-button {
           border: none;
           background-color: #FFDE6E;
           border-radius: 24px;
@@ -127,7 +128,7 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
           align-items: center;
           cursor: pointer;
         }
-        button:after { 
+        #alby-boost-button:after { 
           content: "${
             webLNDisabled
               ? "Enable WebLN and refresh"
@@ -148,7 +149,7 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
           opacity: ${!satsClicked && expand && !sent && !hold ? 1 : 0};
           transition: opacity 0.5s ease-out;
         }
-        button div {
+        #alby-boost-button div {
           box-sizing: content-box;
           font-family: Inter;
           font-size: 16px;
@@ -160,15 +161,15 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
           padding: ${expand ? "0 15px 0 5px" : "0"};
           max-width: ${expand ? (!sent ? "80px" : "120px") : "0"};
         }
-        .disabled-boost #lightning {
+        .alby-disabled-boost #lightning {
           opacity: 0.5;
         }
 
-        .shake {
-          animation: shake 2s;
+        .alby-boost-shake {
+          animation: alby-boost-shake 2s;
           animation-iteration-count: infinite;
         }
-        @keyframes shake {
+        @keyframes alby-boost-shake {
           0% { transform: rotate(0deg); }
           2.5% { transform: rotate(-5deg); }
           5% { transform: rotate(-10deg); }
@@ -177,14 +178,14 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
           17.5% { transform: rotate(5deg); }
           20%, 100% { transform:rotate(0deg); }
         }
-        .ripple-shadow {
-          animation: ripple 2s;
+        .alby-ripple-shadow {
+          animation: alby-ripple 2s;
           animation-iteration-count: infinite;
         }
-        .normal-shadow {
+        .alby-normal-shadow {
           box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
         }
-        @keyframes ripple {
+        @keyframes alby-ripple {
           0% {
             box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04),
                         0 0 0 8px rgba(0, 0, 0, 0.04),
@@ -200,26 +201,26 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
                         0 0 10px 5px rgba(0, 0, 0, 0.2);
           }
         }
-        .boost:active #lightning {
-          animation: ${!sent ? "pop 0.5s" : ""};
+        .alby-boost:active #lightning {
+          animation: ${!sent ? "alby-pop 0.5s" : ""};
           animation-iteration-count: infinite;
         }
-        @keyframes pop {
+        @keyframes alby-pop {
           0% { transform: scale(1); }
           50% { transform: scale(1.3); }
           100% { transform: scale(1); }
         }
-        #loading {
-          animation: rotate 1s steps(6, end) infinite;
+        #alby-loading {
+          animation: alby-rotate 1s steps(6, end) infinite;
         }
-        @keyframes rotate {
+        @keyframes alby-rotate {
           to {
             transform: rotate(360deg);
           }
         }`}
       </style>
       {loading ? (
-        <svg id="loading" width="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg id="alby-loading" width="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M13.507 4.908C15.0044 5.22631 16.3626 6.01043 17.387 7.148" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
           <path d="M17.388 16.851C16.3636 17.9886 15.0054 18.7727 13.508 19.091M10.493 19.092C8.9956 18.7737 7.6374 17.9896 6.61299 16.852M5.10499 14.24C4.63203 12.7841 4.63203 11.2159 5.10499 9.75999M6.61199 7.149C7.6364 6.01142 8.9946 5.2273 10.492 4.909M18.895 9.75999C19.368 11.2159 19.368 12.7841 18.895 14.24" stroke="black" strokeWidth="1.4" strokeLinecap="round"/>
         </svg>
@@ -232,7 +233,7 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
           stroke="black"
           width="40px"
           className={`${
-            !webLNDisabled && !satsClicked && !sent ? "shake" : ""
+            !webLNDisabled && !satsClicked && !sent ? "alby-boost-shake" : ""
           }`}
         >
           <defs>
