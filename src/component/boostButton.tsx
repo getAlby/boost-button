@@ -5,10 +5,12 @@ import { WebLNProvider } from '@webbtc/webln-types';
 export type BoostButtonProps = {
   lnurl: string;
   expanded?: boolean;
+  webLNProvider?: WebLNProvider;
 }
 
 export const BoostButton: React.FC<BoostButtonProps> = ({
   lnurl,
+  webLNProvider = null,
   expanded = false
 }) => {
   const [webLNDisabled, setWebLNDisabled] = useState(false);
@@ -27,7 +29,7 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
   const sendSatsToLnurl = async () => {
     setLoading(true);
     try {
-      const webln: WebLNProvider | undefined = window.webln;
+      let webln: WebLNProvider | undefined = webLNProvider ? webLNProvider : window.webln;
       if (!webln) {
         throw new Error("WebLN is missing");
       }
@@ -60,7 +62,7 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
     if (!window.webln) {
     }
     try {
-      const webln: WebLNProvider | undefined = window.webln;
+      let webln: WebLNProvider | undefined = webLNProvider ? webLNProvider : window.webln;
       if (!webln) {
         throw new Error("WebLN is missing");
       }

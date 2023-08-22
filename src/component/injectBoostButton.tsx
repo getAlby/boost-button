@@ -1,9 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { WebLNProvider } from '@webbtc/webln-types';
 
 import { BoostButton } from "./boostButton";
 
-export const injectBoostButton = (lnurl: string) => {
+export const injectBoostButton = (lnurl: string, webLNProvider?: WebLNProvider) => {
   if (document.querySelector("body #alby-shadow")) {
     return;
   }
@@ -26,5 +27,5 @@ export const injectBoostButton = (lnurl: string) => {
 
   const root = createRoot(app);
 
-  root.render(<BoostButton lnurl={lnurl} />);
+  root.render(<BoostButton lnurl={lnurl} webLNProvider={webLNProvider}/>);
 }
