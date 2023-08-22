@@ -7,6 +7,8 @@ export type BoostButtonProps = {
   webLNProvider?: any;
 }
 
+const forgivenErrors = ["prompt was closed", "user rejected", "call already executing"]
+
 export const BoostButton: React.FC<BoostButtonProps> = ({
   lnurl,
   webLNProvider = null,
@@ -41,9 +43,10 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
       }
     } catch (e) {
       if (e instanceof Error) {
-        if (e.message !== "Prompt was closed" && e.message !== "User rejected")
+        console.error(e.message);
+        const errorMessage = e.message.toLowerCase();
+        if (!forgivenErrors.some(err => errorMessage.includes(err)))
           setWebLNDisabled(true);
-          console.error(e.message);
       }
     } finally {
       setLoading(false);
@@ -73,7 +76,8 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
       if (e instanceof Error) {
       setSatsClicked(0);
       console.error(e.message);
-      if (e.message !== "Prompt was closed" && e.message !== "User rejected")
+      const errorMessage = e.message.toLowerCase();
+      if (!forgivenErrors.some(err => errorMessage.includes(err)))
         setWebLNDisabled(true);
       }
     } finally {
