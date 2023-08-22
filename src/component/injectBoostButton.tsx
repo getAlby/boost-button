@@ -1,10 +1,8 @@
-import React from "react";
 import { createRoot } from "react-dom/client";
-import { WebLNProvider } from '@webbtc/webln-types';
 
 import { BoostButton } from "./boostButton";
 
-export const injectBoostButton = (lnurl: string, webLNProvider?: WebLNProvider) => {
+export const injectBoostButton = (lnurl: string, webLNProvider?: any) => {
   if (document.querySelector("body #alby-shadow")) {
     return;
   }

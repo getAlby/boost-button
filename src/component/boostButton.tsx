@@ -1,11 +1,10 @@
 import { LightningAddress } from "alby-tools";
 import React, { useState } from "react";
-import { WebLNProvider } from '@webbtc/webln-types';
 
 export type BoostButtonProps = {
   lnurl: string;
   expanded?: boolean;
-  webLNProvider?: WebLNProvider;
+  webLNProvider?: any;
 }
 
 export const BoostButton: React.FC<BoostButtonProps> = ({
@@ -29,14 +28,14 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
   const sendSatsToLnurl = async () => {
     setLoading(true);
     try {
-      let webln: WebLNProvider | undefined = webLNProvider ? webLNProvider : window.webln;
+      let webln = webLNProvider ? webLNProvider : window.webln;
       if (!webln) {
         throw new Error("WebLN is missing");
       }
       await webln.enable();
       const result = await webln.lnurl(lnurl);
       if (result) {
-        console.log(result);
+        result.route?.total_amt && setSats(result.route?.total_amt);
         // Don't know how many sats are sent
         setSent(true);
       }
@@ -59,10 +58,8 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
     const invoice = await ln.generateInvoice({
       amount: (satsClicked * 1000).toString(),
     });
-    if (!window.webln) {
-    }
     try {
-      let webln: WebLNProvider | undefined = webLNProvider ? webLNProvider : window.webln;
+      let webln = webLNProvider ? webLNProvider : window.webln;
       if (!webln) {
         throw new Error("WebLN is missing");
       }
