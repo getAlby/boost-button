@@ -187,18 +187,12 @@ export const BoostButton: React.FC<BoostButtonProps> = ({
         }
         @keyframes alby-ripple {
           0% {
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04),
-                        0 0 0 8px rgba(0, 0, 0, 0.04),
-                        0 0 0 12px rgba(0, 0, 0, 0.04),
-                        0 0 0 16px rgba(0, 0, 0, 0.04),
-                        0 0 10px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.06),
+                        0 0 0 4px rgba(0, 0, 0, 0.04);
           }
           100% {
-            box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.04),
-                        0 0 0 12px rgba(0, 0, 0, 0.04),
-                        0 0 0 16px rgba(0, 0, 0, 0.04),
-                        0 0 0 20px rgba(0, 0, 0, 0),
-                        0 0 10px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.06),
+                        0 0 0 8px rgba(0, 0, 0, 0.04);
           }
         }
         .alby-boost:active #lightning {
